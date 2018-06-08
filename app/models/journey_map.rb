@@ -1,0 +1,2 @@
+class JourneyMap < ApplicationRecord
+end

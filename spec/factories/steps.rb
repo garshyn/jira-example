@@ -4,4 +4,8 @@ FactoryBot.define do
     description "MyText"
     association :journey_map
   end
+
+  factory :jira_field, parent: :field, class: 'JiraField' do
+    contents({ 'issue_id' => 1 })
+  end
 end

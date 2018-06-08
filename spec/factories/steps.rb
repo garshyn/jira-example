@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :step do
-    title "MyString"
+    sequence(:title) { |n| "Step #{n}" }
     description "MyText"
-    journey_map nil
+    association :journey_map
   end
 end

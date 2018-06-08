@@ -26,6 +26,7 @@
 /config/master.key
 /vendor/bundle
 /config/database.yml
+/coverage
 /public/packs
 /public/packs-test
 /node_modules

@@ -1,26 +1,54 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 if JourneyMap.none?
   JourneyMap.new(
     title: 'Sample journey map',
   ).tap do |map|
-    map.steps.build([
+    step_1 = map.steps.build(
+      title: 'Step 1',
+    )
+
+    step_1.fields.build([
       {
-        title: 'Step 1',
+        type: 'JiraField',
+        contents: {
+          issue_id: 10006,
+        },
       },
       {
-        title: 'Step 2',
+        type: 'JiraField',
+        contents: {
+          issue_id: 10007,
+        },
       },
       {
-        title: 'Step 3',
+        type: 'JiraField',
+        contents: {
+          issue_id: 10009,
+        },
+      },
+      {
+        type: 'JiraField',
+        contents: {
+          issue_id: 10010,
+        },
       },
     ])
+
+    step_2 = map.steps.build(
+      title: 'Step 2',
+    )
+
+    step_2.fields.build([
+      {
+        type: 'JiraField',
+        contents: {
+          issue_id: 10008,
+        },
+      },
+    ])
+
+    step_3 = map.steps.build(
+      title: 'Step 3',
+    )
 
     map.save!
   end

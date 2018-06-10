@@ -12,7 +12,18 @@ class JiraField < Field
   end
 
   def cached_at
-    contents['cached_at']
+    contents['cached_at']&.to_time
+  end
+
+  def cached_ago
+    return 'never' unless cached?
+    passed = (Time.current - cached_at).round
+    return 'now' if passed.zero?
+    return "#{passed} seconds ago"
+  end
+
+  def issue
+    contents['issue'] || {}
   end
 
   def has_to_sync?

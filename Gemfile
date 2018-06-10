@@ -24,8 +24,11 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'simplecov', :require => false
   gem 'guard-rspec', require: false
+  gem 'webmock'
 end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
+
+gem 'jira-ruby'

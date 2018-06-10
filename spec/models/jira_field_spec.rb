@@ -74,5 +74,39 @@ describe JiraField do
         expect(field).to have_to_sync
       end
     end
+
+    describe '#cached_ago' do
+      context 'with cached_at' do
+        it 'shows time after last cached' do
+          field = build(
+            :jira_field,
+            contents: {
+              'cached_at' => 10.seconds.ago,
+            }
+          )
+
+          expect(field.cached_ago).to eq '10 seconds ago'
+        end
+
+        it 'says now' do
+          field = build(
+            :jira_field,
+            contents: {
+              'cached_at' => Time.current,
+            }
+          )
+
+          expect(field.cached_ago).to eq 'now'
+        end
+      end
+
+      context 'witout cached_at' do
+        it 'says never' do
+          field = build :jira_field
+
+          expect(field.cached_ago).to eq 'never'
+        end
+      end
+    end
   end
 end

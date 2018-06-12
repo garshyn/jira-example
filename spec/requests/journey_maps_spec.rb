@@ -21,7 +21,10 @@ describe 'API' do
           type: 'JiraField',
           contents: {
             'issue_id' => 2,
-            'cached_at' => time,
+            # 'cached_at' => time,
+            # 'issue' => {
+            #   'summary' => 'Issue',
+            # }
           },
         },
       ])
@@ -38,15 +41,32 @@ describe 'API' do
       expect(json['journey_map']['steps'].size).to eq 2
       expect(json['journey_map']['steps'].first['title']).to eq 'Step 1'
       expect(json['journey_map']['steps'].first['fields'].size).to eq 2
+      field = step_1.fields.first
       expect(json['journey_map']['steps'].first['fields'].first).to eq({
+        'id' => field.id,
         'type' => 'JiraField',
         'contents' => {
           'issue_id' => 1,
         },
+        'step_id' => step_1.id,
         'cmp' => 'jira-field',
         'has_to_sync' => true,
-        'url' => jira_field_path(step_1.fields.first),
-        'cached_ago' => 'never',
+        'url' => jira_field_path(field),
+        'errors' => [],
+      })
+
+      field_2 = step_1.fields.second
+      expect(json['journey_map']['steps'].first['fields'].second).to eq({
+        'id' => field_2.id,
+        'type' => 'JiraField',
+        'contents' => {
+          'issue_id' => 2,
+        },
+        'step_id' => step_1.id,
+        'cmp' => 'jira-field',
+        'has_to_sync' => true,
+        'url' => jira_field_path(field_2),
+        'errors' => [],
       })
     end
   end

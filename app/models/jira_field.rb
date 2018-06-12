@@ -1,5 +1,5 @@
 class JiraField < Field
-  CACHED_TIME = 1.minute
+  CACHED_TIME = 10.minutes
 
   validate :validate_structure
 
